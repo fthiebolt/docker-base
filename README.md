@@ -12,7 +12,7 @@ This docker container enables you to become **root** in your container. Especial
   - **NO persistant volume** --> if you need it, ask me !
   - *[TODO] Prometheus end-point (internal monitoring)*
 
-![docker-base container overview](img/docker-base-overview.png)
+![docker-base container overview](images/docker-base-overview.png)
 
 
 TO BE CONTINUED
