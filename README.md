@@ -2,7 +2,9 @@
 _____________________________________________________________________
 
 **WHY THIS ???**
+
 **Because `docker` is a root only command hence we allow you to login root within your container**
+
 *(behind the hood is `supervisord`)*
 
 This docker container enables you to become **root** in your container. Especially, this container features the following cvapabilities:
@@ -19,7 +21,7 @@ TO BE CONTINUED
 
 
 ### Environment variables ###
-When you start this application (see below), you can pass several environment variables:
+Your application may take advantage of the following env. vars::
 
   - **DEBUG=1** this is our application debug feature
   - **SIM=1** this is our application simulation feature: kind of *read-only* mode (i.e no write to any database)
@@ -27,28 +29,26 @@ When you start this application (see below), you can pass several environment va
   - **DJANGO_SECRET_KEY** Django's internal secret key [mandatory]
   - **MQTT_SERVER** and **MQTT_PORT**
   - **MQTT_USER** and **MQTT_PASSWD** are sensOCampus own MQTT credentials
-  - **MQTT_TOPICS** json formated list of topics to subscribe to (usually #/device)
-  - **MQTT_UNITID** is a neOCampus identifier fr msg filtering
   - **PGSQL_USER** and **PGSQL_PASSWD** are Postgres credentials for sensOCampus' internal database
   - **PGSQL_SERVER**=172.17.0.1   this is the docker gateway
-  - **PGSQL_PORT**=5432
-  - **PGSQL_DATABASE**=sensocampus    name of the database
+  - **PGSQL_PORT**
+  - **PGSQL_DATABASE**=myDatabase    name of your database
 
 
 ### [HTTP] git clone ###
 Only **first time** operation.
 
-`git clone https://fthiebolt@bitbucket.org/fthiebolt/sensocampus.git`  
+`git clone https://github.com/fthiebolt/docker-base.git`  
 
 ### git pull ###
 ```
-cd sensocampus
+cd docker-base
 git pull
 ```
 
 ### git push ###
 ```
-cd sensocampus
+cd docker-base
 ./git-push.sh
 ```
 
@@ -64,7 +64,7 @@ git branch -d tmp
 
 ### start container ###
 ```
-cd sensocampus
+cd docker-base
 DJANGO_DEBUG=1 SIM=1 DEBUG=1 \
 MQTT_PASSWD='passwd' PGSQL_PASSWD='passwd' DJANGO_SECRET_KEY='<xxxxxx>' \
 docker-compose --verbose up -d
@@ -72,22 +72,22 @@ docker-compose --verbose up -d
 
 ### fast update of existing running container ###
 ```
-cd sensocampus
+cd docker-base
 git pull
 DEBUG=1 MQTT_PASSWD='passwd' PGSQL_PASSWD='passwd' DJANGO_SECRET_KEY='<xxxxxx>' docker-compose --verbose up --build -d
 ```  
 
 ### ONLY (re)generate image of container ###
 ```
-cd sensocampus
+cd docker-base
 docker-compose build --force-rm --no-cache
-[alternative] docker build --no-cache -t sensocampus2 -f Dockerfile .
+[alternative] docker build --no-cache -t myApp -f Dockerfile .
 ```
 
 ### start container for maintenance ###
 ```
-cd sensocampus
-docker run -v /etc/localtime:/etc/localtime:ro -v "$(pwd)"/app:/opt/app:rw -it sensOCampus2 bash
+cd docker-base
+docker run -v /etc/localtime:/etc/localtime:ro -v "$(pwd)"/app:/opt/app:rw -it myApp bash
 ```
 
 ### ssh root @ container ? ###
