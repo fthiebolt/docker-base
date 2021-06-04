@@ -16,9 +16,38 @@ This docker container enables you to become **root** in your container. Especial
 
 ![docker-base container overview](images/docker-base-overview.png)
 
+### config check example
+`DOCKER_BASE_CONTAINER_NAME="malik" DOCKER_BASE_SSH_PORT="2242" DOCKER_BASE_APP_PORT="8087" docker-compose config`
 
-TO BE CONTINUED
-
+```
+services:
+  app:
+    build:
+      context: /root/docker-base
+    container_name: malik
+    environment:
+      DEBUG: null
+      FLASK_DEBUG: null
+      FLASK_ENV: null
+      INFLUX_BUCKETS: '[ ''sensors_hires'', ''sensors_lowres'' ]'
+      INFLUX_ORG: eCOnect
+      INFLUX_PORT: null
+      INFLUX_SERVER: 172.17.0.1
+      INFLUX_TOKEN: null
+      PYTHONUNBUFFERED: '1'
+      SIM: null
+    image: docker-base
+    network_mode: bridge
+    ports:
+    - published: 8087
+      target: 8000
+    - published: 2242
+      target: 22
+    restart: unless-stopped
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+version: '3.5'
+```
 
 ### Environment variables ###
 Your application may take advantage of the following env. vars::
