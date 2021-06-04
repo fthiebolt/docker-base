@@ -11,10 +11,10 @@
     - supervisorctl start all
 
   Logs
-    - tailf /var/log/supervisor/dashboard.log
-    - tailf /var/log/supervisor/backend.log
-    - tailf /var/log/supervisor/dashboard_setup.log
-    - tailf /var/log/supervisor/backend_setup.log
+    - tailf /var/log/myapp/dashboard.log
+    - tailf /var/log/myapp/backend.log
+    - tailf /var/log/myapp/dashboard_setup.log
+    - tailf /var/log/myapp/backend_setup.log
 
 ===============================================================================
 

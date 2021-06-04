@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  app:
+    build: .
+    image: docker-base
+    #[may.21] a bit later, we'll generate the sandfox image as part of the neocampus images available at docker hub
+    #image: neocampus/sandfox
+    # WARNING: a container-name implies only one instance
+    #container_name: sandfox
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      # ONLY for development mode
+      # ==> REQUIRES YOU TO BE WITHIN DATACOLLECTOR repository !!
+      #- ${PWD}/app:/opt/app
+    network_mode: bridge
+    ports:
+      # <host_port>:<container_port> is port mapping
+      - "${DOCKER_BASE_APP_PORT:-8080}:8000"     # Web app
+      - "${DOCKER_BASE_SSH_PORT:-2240}:22"      # SSH
+    #env_file:
+      # environment section has precedence over env_file
+      #- ${PWD}/sandfox.env
+    environment:
+      # DEBUG is the app. debugging feature
+      # SIM is the read-only mode (i.e no write to any database) for testing purposes
+      # FLASK_ENV=development activate ALL flask debug features
+      # FLASK_DEBUG as you guessed ;)
+      - PYTHONUNBUFFERED=1
+      - FLASK_DEBUG
+      - FLASK_ENV
+      - DEBUG
+      - SIM
+      # InfluxDB, server is docker gateway
+      - INFLUX_TOKEN
+      - INFLUX_SERVER=172.17.0.1
+      - INFLUX_PORT
+      - INFLUX_ORG=eCOnect
+      - INFLUX_BUCKETS=[ 'sensors_hires', 'sensors_lowres' ]
+
