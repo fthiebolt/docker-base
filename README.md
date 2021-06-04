@@ -22,8 +22,9 @@ This docker container enables you to become **root** in your container. Especial
   - launch container
 
 **Build**
-`docker 
+`docker build --no-cache -t docker-base .`
 
+**Check config**
 ```
 DOCKER_BASE_CONTAINER_NAME="malik" \
 DOCKER_BASE_SSH_PORT="2240" DOCKER_BASE_APP_PORT="8080" \
@@ -58,6 +59,13 @@ services:
     volumes:
     - /etc/localtime:/etc/localtime:ro
 version: '3.5'
+```
+
+**Start container**
+```
+DOCKER_BASE_CONTAINER_NAME="malik" \
+DOCKER_BASE_SSH_PORT="2240" DOCKER_BASE_APP_PORT="8080" \
+docker-compose up -d
 ```
 
 ### Environment variables ###
