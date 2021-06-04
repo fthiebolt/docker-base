@@ -16,10 +16,17 @@ This docker container enables you to become **root** in your container. Especial
 
 ![docker-base container overview](images/docker-base-overview.png)
 
-### config check example
+## Sample use
+  - build container
+  - check container config
+  - launch container
+
+**Build**
+`docker 
+
 ```
 DOCKER_BASE_CONTAINER_NAME="malik" \
-DOCKER_BASE_SSH_PORT="2242" DOCKER_BASE_APP_PORT="8087" \
+DOCKER_BASE_SSH_PORT="2240" DOCKER_BASE_APP_PORT="8080" \
 docker-compose config
 ```
 
