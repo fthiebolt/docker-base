@@ -7,7 +7,7 @@ _____________________________________________________________________
 
 *(behind the hood is `supervisord`)*
 
-This docker container enables you to become **root** in your container. Especially, this container features the following cvapabilities:
+This docker container enables you to become **root** in your container. Especially, this container features the following capabilities:
 
   - SSH daemon --> enables you to log as root within the container
   - one port to have your `/app/xxx` reachable from the internet
@@ -26,7 +26,7 @@ This docker container enables you to become **root** in your container. Especial
 
 **Check config**
 ```
-DOCKER_BASE_CONTAINER_NAME="malik" \
+COMPOSE_PROJECT_NAME="malik" \
 DOCKER_BASE_SSH_PORT="2240" DOCKER_BASE_APP_PORT="8080" \
 docker-compose config
 ```
@@ -63,9 +63,13 @@ version: '3.5'
 
 **Start container**
 ```
-DOCKER_BASE_CONTAINER_NAME="malik" \
+CONTAINER_PROJECT_NAME="malik" \
 DOCKER_BASE_SSH_PORT="2240" DOCKER_BASE_APP_PORT="8080" \
 docker-compose up -d
+```
+... then check status
+```
+journalctl -ef CONTAINER_NAME=malik
 ```
 
 ### Environment variables ###
