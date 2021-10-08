@@ -63,7 +63,7 @@ version: '3.5'
 
 **Start container**
 ```
-CONTAINER_PROJECT_NAME="malik" \
+COMPOSE_PROJECT_NAME="malik" \
 DOCKER_BASE_SSH_PORT="2240" DOCKER_BASE_APP_PORT="8080" \
 docker-compose up -d
 ```
