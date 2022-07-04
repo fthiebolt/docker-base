@@ -36,7 +36,7 @@ services:
   app:
     build:
       context: /root/docker-base
-    container_name: malik
+    container_name: ${COMPOSE_PROJECT_NAME}
     environment:
       DEBUG: null
       FLASK_DEBUG: null
@@ -86,6 +86,8 @@ Your application may take advantage of the following env. vars::
   - **PGSQL_PORT**
   - **PGSQL_DATABASE**=myDatabase    name of your database
 
+WARNING: **COMPOSE_PROJECT_NAME**
+Whenever you want to have severall instances of containers launched from the same docker-compose file, docker will consider as being the same (hence overwriting them) unless you specify a COMPOSE_PROJECT_NAME :|
 
 ### [HTTP] git clone ###
 Only **first time** operation.
